@@ -104,11 +104,17 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
                 padding: const EdgeInsets.only(top: Sizes.x2),
                 itemBuilder: (context, index) {
                   return CardHomeWidget(
-                    onTap: () {
-                      Modular.to.pushNamed(
+                    onTap: () async {
+                      bool? value = await Modular.to.pushNamed<bool>(
                         '/detail',
                         arguments: homeState.data[index],
                       );
+                      if(value!){
+                        homeBloc.add(GetHomeListVacancyEvent(param: 'dateEntry'));
+                        setState(() {
+                          changeTitle('dateEntry');
+                        });
+                      }
                     },
                     name: homeState.data[index].driverName,
                     plate: homeState.data[index].plate,
@@ -128,10 +134,17 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
           color: ColorsPallete.backgroundColor,
           size: Sizes.x3,
         ),
-        onPressed: () {
-          Modular.to.pushNamed(
+        onPressed: () async {
+          bool? value = await Modular.to.pushNamed<bool>(
             '/add',
           );
+
+          if(value!){
+            homeBloc.add(GetHomeListVacancyEvent(param: 'dateEntry'));
+            setState(() {
+              changeTitle('dateEntry');
+            });
+          }
         },
       ),
     );

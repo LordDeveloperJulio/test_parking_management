@@ -61,7 +61,7 @@ class _DetailRegisterPageState extends State<DetailRegisterPage>
                   backgroundColor: ColorsPallete.primaryColor,
                 ),
               );
-              Modular.to.pop();
+              Modular.to.pop(true);
             }
           },
           bloc: detalRegisterBloc,

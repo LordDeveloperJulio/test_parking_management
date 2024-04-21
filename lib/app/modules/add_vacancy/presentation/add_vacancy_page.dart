@@ -78,7 +78,7 @@ class _AddVacancyPageState extends State<AddVacancyPage>
                   backgroundColor: ColorsPallete.primaryColor,
                 ),
               );
-              Modular.to.pop();
+              Modular.to.pop(true);
             }
           },
           bloc: addVacancyBloc,
