@@ -1,0 +1,1 @@
+export 'card_home_widget.dart';

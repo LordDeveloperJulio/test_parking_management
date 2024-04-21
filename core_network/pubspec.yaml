@@ -1,0 +1,22 @@
+name: core_network
+description: Core Network module to enable connectivity into devices
+version: 0.0.1
+homepage: 'none'
+
+environment:
+  sdk: '>=3.0.5 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^5.3.2
+  get_it: ^7.6.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  mocktail: ^0.3.0
+
+flutter:
