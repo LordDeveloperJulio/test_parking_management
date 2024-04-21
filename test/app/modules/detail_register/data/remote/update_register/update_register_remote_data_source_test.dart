@@ -32,4 +32,27 @@ void main() {
     final response = await dataSource.updateRegister(registerVacancyEntity: Resources.mockUpdateRegister);
     expect(response, isA<Right<HttpExceptions, Map<dynamic, dynamic>>>());
   });
+
+  test('method put should return a throw exception', () async {
+    when(
+          () => client.put(any(), data: {
+        'id': Resources.mockUpdateRegister.id,
+        'driverName': Resources.mockUpdateRegister.driverName,
+        'plate': Resources.mockUpdateRegister.plate,
+        'vacancyId': Resources.mockUpdateRegister.vacancyId,
+        'dateEntry': Resources.mockUpdateRegister.dateEntry,
+        'dateExit': Resources.mockUpdateRegister.dateExit,
+      }),
+    ).thenThrow(
+      HttpGeneralException(statusCode: 406, data: null),
+    );
+
+    final response =
+    await dataSource.updateRegister(registerVacancyEntity: Resources.mockUpdateRegister);
+
+    expect(
+        response,
+        isA<Left<HttpExceptions, Map<dynamic, dynamic>>>()
+    );
+  });
 }

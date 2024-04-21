@@ -31,4 +31,25 @@ void main() {
     final response = await dataSource.getAllRegisters(param: 'dateEntry');
     expect(response, isA<Right<HttpExceptions, List<dynamic>>>());
   });
+
+  test('method get should return a throw exception', () async {
+    when(
+          () => client.get(
+        any(),
+        queryParameters: {
+          'dateEntry': true,
+        },
+      ),
+    ).thenThrow(
+      HttpGeneralException(statusCode: 406, data: null),
+    );
+
+    final response =
+    await dataSource.getAllRegisters(param: 'dateEntry');
+
+    expect(
+      response,
+      isA<Left<HttpExceptions, List<dynamic>>>()
+    );
+  });
 }
