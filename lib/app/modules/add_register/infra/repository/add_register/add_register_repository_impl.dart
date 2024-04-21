@@ -1,24 +1,23 @@
 import 'package:core_network/implementation/exceptions/http_exceptions.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../../shared/domain/entities/entities.dart';
 import '../../../../shared/exceptions/exceptions.dart';
-import '../../../../shared/infra/mappers/mappers.dart';
 import '../../../data/data.dart';
-import 'update_register_repository.dart';
+import '../../../domain/domain.dart';
+import '../../infra.dart';
 
-class UpdateRegisterRepositoryImpl implements UpdateRegisterRepository {
-  final UpdateRegisterRemoteDataSource dataSource;
+class AddRegisterRepositoryImpl implements AddRegisterRepository {
+  final AddRegisterRemoteDataSource dataSource;
 
-  UpdateRegisterRepositoryImpl({
+  AddRegisterRepositoryImpl({
     required this.dataSource,
   });
 
   @override
-  Future<Either<NetworkExceptions, RegistersEntity>> updateRegister({
-    required RegistersEntity registerVacancyEntity,
+  Future<Either<NetworkExceptions, AddRegisterEntity>> addRegister({
+    required AddRegisterEntity registerVacancyEntity,
   }) async {
-    final result = await dataSource.updateRegister(
+    final result = await dataSource.addRegister(
       registerVacancyEntity: registerVacancyEntity,
     );
 
@@ -29,7 +28,7 @@ class UpdateRegisterRepositoryImpl implements UpdateRegisterRepository {
       },
       (r) {
         try {
-          return right(RegistersResponse.fromJson(r).toEntity());
+          return right(AddRegisterResponse.fromJson(r).toEntity());
         } catch (e) {
           return left(NetworkUnknownException());
         }
