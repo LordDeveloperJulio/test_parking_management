@@ -18,7 +18,6 @@ class GetListVacancyRemoteDataSourceImpl
     try {
       final result = await networkClient.get(ApiRoutes.getAllVacancy);
 
-      print(result.data);
       return Right(result.data);
     } on HttpExceptions catch (error) {
       return Left(error);
