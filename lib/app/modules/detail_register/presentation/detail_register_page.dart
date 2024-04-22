@@ -103,7 +103,7 @@ class _DetailRegisterPageState extends State<DetailRegisterPage>
                         padding: const EdgeInsets.only(top: Sizes.x4),
                         child: ElevatedButton(
                           key: DetailKeys.releaseVacancyButtonKey,
-                            onPressed: () {
+                             onPressed: widget.vacancyEntity.dateExit!.isEmpty ? () {
                               detalRegisterBloc.add(
                                 RegisterUpdateVacancyEvent(
                                   registerVacancyEntity: RegistersEntity(
@@ -116,7 +116,7 @@ class _DetailRegisterPageState extends State<DetailRegisterPage>
                                   ),
                                 ),
                               );
-                            },
+                            } : null,
                             child: const Text('Desocupar vaga')),
                       ),
                     ],
