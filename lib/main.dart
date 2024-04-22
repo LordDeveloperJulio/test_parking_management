@@ -5,7 +5,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 import 'app/app_module.dart';
 import 'app/app_widget.dart';
-import 'app/modules/shared/api_routes.dart';
+import 'app/common/api_routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

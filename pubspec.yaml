@@ -8,6 +8,8 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
+  integration_test:
+    sdk: flutter
   flutter:
     sdk: flutter
   dartz: ^0.10.1

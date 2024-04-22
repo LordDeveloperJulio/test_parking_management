@@ -6,6 +6,7 @@ import '../../shared/utils/colors_pallete.dart';
 import '../../shared/utils/sizes.dart';
 import '../../shared/widgets/widget.dart';
 import '../domain/domain.dart';
+import 'add_register_keys/add_register_keys.dart';
 import 'add_vacancy_page_mixin.dart';
 import 'bloc/add_vacancy_bloc.dart';
 import 'bloc/add_vacancy_event.dart';
@@ -105,11 +106,13 @@ class _AddRegisterPageState extends State<AddRegisterPage>
                   child: Column(
                     children: [
                       InputTextWidget(
+                        key: AddRegisterKeys.driverNameInputKey,
                         label: 'Condutor',
                         controller: driverNameController,
                         validator: validateEmpty,
                       ),
                       InputTextWidget(
+                        key: AddRegisterKeys.plateInputKey,
                         label: 'Placa',
                         controller: plateController,
                         validator: validateEmpty,
@@ -118,6 +121,7 @@ class _AddRegisterPageState extends State<AddRegisterPage>
                         height: Sizes.x6,
                         width: MediaQuery.of(context).size.width * 0.5,
                         child: DropdownButtonFormField<VacancyEntity>(
+                          key: AddRegisterKeys.vacancySelectKey,
                           hint: selectedValue != null
                               ? Text('${selectedValue?.number}')
                               : const Text('Vaga: '),
@@ -134,6 +138,7 @@ class _AddRegisterPageState extends State<AddRegisterPage>
                               value:
                               list[index],
                               child: Text(
+                                key: AddRegisterKeys.vacancySelectItemKey,
                                 '${state.data[index].number}',
                               ),
                             ),
@@ -146,6 +151,7 @@ class _AddRegisterPageState extends State<AddRegisterPage>
                           height: Sizes.x6,
                           width: double.infinity,
                           child: ElevatedButton(
+                            key: AddRegisterKeys.registerButtonKey,
                             onPressed: () {
                               validateFields(
                                 AddRegisterEntity(

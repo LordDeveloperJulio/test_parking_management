@@ -7,7 +7,7 @@ mixin HomePageMixin {
 
   String titlePage = "Entradas/Dia";
 
-  changeTitle(String value){
+  changeTitle(String value) {
     switch (value) {
       case "dateEntry":
         titlePage = "Entradas/Dia";

@@ -7,6 +7,7 @@ import '../../shared/utils/sizes.dart';
 import '../../shared/widgets/widget.dart';
 import 'bloc/detail_register_event.dart';
 import 'bloc/detail_register_state.dart';
+import 'detail_keys/detail_keys.dart';
 import 'detail_register_page_mixin.dart';
 
 class DetailRegisterPage extends StatefulWidget {
@@ -101,6 +102,7 @@ class _DetailRegisterPageState extends State<DetailRegisterPage>
                       Padding(
                         padding: const EdgeInsets.only(top: Sizes.x4),
                         child: ElevatedButton(
+                          key: DetailKeys.releaseVacancyButtonKey,
                             onPressed: () {
                               detalRegisterBloc.add(
                                 RegisterUpdateVacancyEvent(

@@ -2,7 +2,7 @@ import 'package:core_network/api/network_client.dart';
 import 'package:core_network/implementation/exceptions/http_exceptions.dart';
 import 'package:dartz/dartz.dart';
 
-import '../../../../shared/api_routes.dart';
+import '../../../../../common/api_routes.dart';
 import '../../../../shared/domain/entities/entities.dart';
 import 'update_register_remote_data_source.dart';
 

@@ -8,11 +8,14 @@ import '../../shared/widgets/text_view_widget.dart';
 import 'bloc/home_bloc.dart';
 import 'bloc/home_event.dart';
 import 'bloc/home_state.dart';
+import 'home_keys/home_keys.dart';
 import 'home_page_mixin.dart';
 import 'widget/card_home_widget.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({
+    super.key,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -37,6 +40,7 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
         ),
         actions: [
           PopupMenuButton(
+            key: HomeKeys.popUpMenuKey,
             iconColor: Colors.white,
             icon: const Icon(Icons.menu),
             position: PopupMenuPosition.under,
@@ -47,12 +51,13 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
               });
             },
             itemBuilder: (BuildContext bc) {
-              return const [
+              return [
                 PopupMenuItem(
                   value: 'dateEntry',
                   child: Text("Entradas/Dia"),
                 ),
                 PopupMenuItem(
+                  key: HomeKeys.popUpMenuDeparturesDay,
                   value: 'dateExit',
                   child: Text("Saídas/Dia"),
                 ),
@@ -104,13 +109,15 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
                 padding: const EdgeInsets.only(top: Sizes.x2),
                 itemBuilder: (context, index) {
                   return CardHomeWidget(
+                    key: HomeKeys.cardListKey,
                     onTap: () async {
                       bool? value = await Modular.to.pushNamed<bool>(
                         '/detail',
                         arguments: homeState.data[index],
                       );
-                      if(value!){
-                        homeBloc.add(GetHomeListVacancyEvent(param: 'dateEntry'));
+                      if (value!) {
+                        homeBloc
+                            .add(GetHomeListVacancyEvent(param: 'dateEntry'));
                         setState(() {
                           changeTitle('dateEntry');
                         });
@@ -128,6 +135,7 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
         },
       ),
       floatingActionButton: FloatingActionButton(
+        key: HomeKeys.floatButtonKey,
         backgroundColor: ColorsPallete.primaryColor,
         child: const Icon(
           Icons.add,
@@ -139,7 +147,7 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
             '/add',
           );
 
-          if(value!){
+          if (value!) {
             homeBloc.add(GetHomeListVacancyEvent(param: 'dateEntry'));
             setState(() {
               changeTitle('dateEntry');
