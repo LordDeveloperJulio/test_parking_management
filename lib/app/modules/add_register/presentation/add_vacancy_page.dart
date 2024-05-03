@@ -103,74 +103,76 @@ class _AddRegisterPageState extends State<AddRegisterPage>
                 key: formKey,
                 child: Padding(
                   padding: const EdgeInsets.all(Sizes.x2),
-                  child: Column(
-                    children: [
-                      InputTextWidget(
-                        key: AddRegisterKeys.driverNameInputKey,
-                        label: 'Condutor',
-                        controller: driverNameController,
-                        validator: validateEmpty,
-                      ),
-                      InputTextWidget(
-                        key: AddRegisterKeys.plateInputKey,
-                        label: 'Placa',
-                        controller: plateController,
-                        validator: validateEmpty,
-                      ),
-                      SizedBox(
-                        height: Sizes.x6,
-                        width: MediaQuery.of(context).size.width * 0.5,
-                        child: DropdownButtonFormField<VacancyEntity>(
-                          key: AddRegisterKeys.vacancySelectKey,
-                          hint: selectedValue != null
-                              ? Text('${selectedValue?.number}')
-                              : const Text('Vaga: '),
-                          icon: const Icon(Icons.arrow_drop_down),
-                          value: selectedValue,
-                          onChanged: (value) {
-                            setState(() {
-                              selectedValue = value;
-                            });
-                          },
-                          items: List.generate(
-                            list.length,
-                            (index) => DropdownMenuItem(
-                              value:
-                              list[index],
-                              child: Text(
-                                key: AddRegisterKeys.vacancySelectItemKey,
-                                '${state.data[index].number}',
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        InputTextWidget(
+                          key: AddRegisterKeys.driverNameInputKey,
+                          label: 'Condutor',
+                          controller: driverNameController,
+                          validator: validateEmpty,
+                        ),
+                        InputTextWidget(
+                          key: AddRegisterKeys.plateInputKey,
+                          label: 'Placa',
+                          controller: plateController,
+                          validator: validateEmpty,
+                        ),
+                        SizedBox(
+                          height: Sizes.x6,
+                          width: MediaQuery.of(context).size.width * 0.5,
+                          child: DropdownButtonFormField<VacancyEntity>(
+                            key: AddRegisterKeys.vacancySelectKey,
+                            hint: selectedValue != null
+                                ? Text('${selectedValue?.number}')
+                                : const Text('Vaga: '),
+                            icon: const Icon(Icons.arrow_drop_down),
+                            value: selectedValue,
+                            onChanged: (value) {
+                              setState(() {
+                                selectedValue = value;
+                              });
+                            },
+                            items: List.generate(
+                              list.length,
+                              (index) => DropdownMenuItem(
+                                value:
+                                list[index],
+                                child: Text(
+                                  key: AddRegisterKeys.vacancySelectItemKey,
+                                  '${state.data[index].number}',
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: Sizes.x7),
-                        child: SizedBox(
-                          height: Sizes.x6,
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            key: AddRegisterKeys.registerButtonKey,
-                            onPressed: () {
-                              validateFields(
-                                AddRegisterEntity(
-                                  driverName: driverNameController.text,
-                                  plate: plateController.text,
-                                  vacancyId: selectedValue?.id ?? 0,
-                                  dateEntry: DateTime.now().toString(),
-                                  dateExit: '',
-                                ),
-                              );
-                            },
-                            child: const Text(
-                              'Registrar',
-                              style: TextStyle(fontSize: Sizes.x2),
+                        Padding(
+                          padding: const EdgeInsets.only(top: Sizes.x7),
+                          child: SizedBox(
+                            height: Sizes.x6,
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              key: AddRegisterKeys.registerButtonKey,
+                              onPressed: () {
+                                validateFields(
+                                  AddRegisterEntity(
+                                    driverName: driverNameController.text,
+                                    plate: plateController.text,
+                                    vacancyId: selectedValue?.id ?? 0,
+                                    dateEntry: DateTime.now().toString(),
+                                    dateExit: '',
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Registrar',
+                                style: TextStyle(fontSize: Sizes.x2),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               );
