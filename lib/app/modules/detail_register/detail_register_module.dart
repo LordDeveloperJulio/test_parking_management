@@ -12,30 +12,23 @@ class DetailRegisterModule extends Module {
   void binds(Injector i) {
     super.binds(i);
     //BLOC
-    i.add(
-      () => DetailRegisterBloc(
-          updateRegisterUseCase: Modular.get<UpdateRegisterUseCase>()),
-    );
+    i.add<DetailRegisterBloc>(DetailRegisterBloc.new, config: BindConfig(onDispose: (bloc) => bloc.close()));
     //USECASE
     i.add<UpdateRegisterUseCase>(
-      () => UpdateRegisterUseCaseImpl(
-          repository: Modular.get<UpdateRegisterRepository>()),
+      () => UpdateRegisterUseCaseImpl(repository: Modular.get<UpdateRegisterRepository>()),
     );
     //REPOSITORY
     i.add<UpdateRegisterRepository>(
-      () => UpdateRegisterRepositoryImpl(
-          dataSource: Modular.get<UpdateRegisterRemoteDataSource>()),
+      () => UpdateRegisterRepositoryImpl(dataSource: Modular.get<UpdateRegisterRemoteDataSource>()),
     );
     //DATASOURCE
     i.add<UpdateRegisterRemoteDataSource>(
-      () => UpdateRegisterRemoteDataSourceImpl(
-          networkClient: CoreNetwork.instance),
+      () => UpdateRegisterRemoteDataSourceImpl(networkClient: CoreNetwork.instance),
     );
   }
 
   @override
   void routes(r) {
-    r.child('/',
-        child: (context) => DetailRegisterPage(vacancyEntity: r.args.data));
+    r.child('/', child: (context) => DetailRegisterPage(vacancyEntity: r.args.data));
   }
 }

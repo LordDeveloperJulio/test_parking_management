@@ -1,5 +1,4 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:test_parking_management/app/modules/add_register/domain/domain.dart';
 import 'package:test_parking_management/app/modules/add_register/presentation/add_register_keys/add_register_keys.dart';
 import 'package:test_parking_management/app/modules/add_register/presentation/add_vacancy_page.dart';
 import 'package:test_parking_management/app/modules/home/presentation/home_keys/home_keys.dart';

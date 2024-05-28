@@ -1,22 +1,23 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
 import 'bloc/home_bloc.dart';
+import 'constants/strings_constants.dart';
 
 mixin HomePageMixin {
   final HomeBloc homeBloc = Modular.get<HomeBloc>();
 
-  String titlePage = "Entradas/Dia";
+  String titlePage = StringConstants.inputDay;
 
   changeTitle(String value) {
     switch (value) {
-      case "dateEntry":
-        titlePage = "Entradas/Dia";
+      case StringConstants.dateEntry:
+        titlePage = StringConstants.inputDay;
         break;
-      case "dateExit":
-        titlePage = "Saídas/Dia";
+      case StringConstants.dateExit:
+        titlePage = StringConstants.outputDay;
         break;
-      case "":
-        titlePage = "Entradas e Saídas/Dia";
+      case StringConstants.empty:
+        titlePage = StringConstants.inputOutput;
         break;
     }
   }

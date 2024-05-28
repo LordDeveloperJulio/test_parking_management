@@ -12,34 +12,24 @@ class AddRegisterModule extends Module {
   void binds(Injector i) {
     super.binds(i);
     //BLOC
-    i.add(
-      () => AddRegisterBloc(
-        getVacancyUseCase: Modular.get<GetVacancyUseCase>(),
-        addRegisterUseCase: Modular.get<AddRegisterUseCase>(),
-      ),
-    );
+    i.add<AddRegisterBloc>(AddRegisterBloc.new, config: BindConfig(onDispose: (bloc) => bloc.close()));
     //USECASE
     i.add<GetVacancyUseCase>(
-      () => GetVacancyUseCaseImpl(
-          repository: Modular.get<GetListVacancyRepository>()),
+      () => GetVacancyUseCaseImpl(repository: Modular.get<GetListVacancyRepository>()),
     );
     i.add<AddRegisterUseCase>(
-      () => AddRegisterUseCaseImpl(
-          repository: Modular.get<AddRegisterRepository>()),
+      () => AddRegisterUseCaseImpl(repository: Modular.get<AddRegisterRepository>()),
     );
     //REPOSITORY
     i.add<GetListVacancyRepository>(
-      () => GetListVacancyRepositoryImpl(
-          dataSource: Modular.get<GetListVacancyRemoteDataSource>()),
+      () => GetListVacancyRepositoryImpl(dataSource: Modular.get<GetListVacancyRemoteDataSource>()),
     );
     i.add<AddRegisterRepository>(
-      () => AddRegisterRepositoryImpl(
-          dataSource: Modular.get<AddRegisterRemoteDataSource>()),
+      () => AddRegisterRepositoryImpl(dataSource: Modular.get<AddRegisterRemoteDataSource>()),
     );
     //DATASOURCE
     i.add<GetListVacancyRemoteDataSource>(
-      () => GetListVacancyRemoteDataSourceImpl(
-          networkClient: CoreNetwork.instance),
+      () => GetListVacancyRemoteDataSourceImpl(networkClient: CoreNetwork.instance),
     );
     i.add<AddRegisterRemoteDataSource>(
       () => AddRegisterRemoteDataSourceImpl(networkClient: CoreNetwork.instance),

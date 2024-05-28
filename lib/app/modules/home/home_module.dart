@@ -12,25 +12,18 @@ class HomeModule extends Module {
   void binds(Injector i) {
     super.binds(i);
     //BLOC
-    i.add(
-      () => HomeBloc(
-        getListVacancyUseCase: Modular.get<GetAllRegistersUseCase>(),
-      ),
-    );
+    i.add<HomeBloc>(HomeBloc.new, config: BindConfig(onDispose: (bloc) => bloc.close()));
     //USECASE
     i.add<GetAllRegistersUseCase>(
-      () => GetAllRegistersUseCaseImpl(
-          repository: Modular.get<GetAllRegistersRepository>()),
+      () => GetAllRegistersUseCaseImpl(repository: Modular.get<GetAllRegistersRepository>()),
     );
     //REPOSITORY
     i.add<GetAllRegistersRepository>(
-      () => GetAllRegistersRepositoryImpl(
-          dataSource: Modular.get<GetAllRegistersRemoteDataSource>()),
+      () => GetAllRegistersRepositoryImpl(dataSource: Modular.get<GetAllRegistersRemoteDataSource>()),
     );
     //DATASOURCE
     i.add<GetAllRegistersRemoteDataSource>(
-      () => GetAllRegistersRemoteDataSourceImpl(
-          networkClient: CoreNetwork.instance),
+      () => GetAllRegistersRemoteDataSourceImpl(networkClient: CoreNetwork.instance),
     );
   }
 

@@ -8,6 +8,7 @@ import '../../shared/widgets/text_view_widget.dart';
 import 'bloc/home_bloc.dart';
 import 'bloc/home_event.dart';
 import 'bloc/home_state.dart';
+import 'constants/strings_constants.dart';
 import 'home_keys/home_keys.dart';
 import 'home_page_mixin.dart';
 import 'widget/card_home_widget.dart';
@@ -25,7 +26,7 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
   @override
   void initState() {
     super.initState();
-    homeBloc.add(GetHomeListVacancyEvent(param: 'dateEntry'));
+    homeBloc.add(GetHomeListVacancyEvent(param: StringConstants.empty));
   }
 
   @override
@@ -52,18 +53,18 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
             },
             itemBuilder: (BuildContext bc) {
               return [
-                PopupMenuItem(
-                  value: 'dateEntry',
-                  child: Text("Entradas/Dia"),
+                const PopupMenuItem(
+                  value: StringConstants.dateEntry,
+                  child: Text(StringConstants.inputDay),
                 ),
                 PopupMenuItem(
                   key: HomeKeys.popUpMenuDeparturesDay,
-                  value: 'dateExit',
-                  child: Text("Saídas/Dia"),
+                  value: StringConstants.dateExit,
+                  child: const Text(StringConstants.outputDay),
                 ),
-                PopupMenuItem(
-                  value: '',
-                  child: Text("Entradas e Saídas/Dia"),
+                const PopupMenuItem(
+                  value: StringConstants.empty,
+                  child: Text(StringConstants.inputOutput),
                 ),
               ];
             },
@@ -77,13 +78,13 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: TextViewWidget(
-                  label: 'Error: ${homeState.error}',
+                  label: '${StringConstants.error} ${homeState.error}',
                   size: Sizes.x2,
                   color: ColorsPallete.redColor,
                 ),
               ),
             );
-            homeBloc.add(GetHomeListVacancyEvent(param: 'dateEntry'));
+            homeBloc.add(GetHomeListVacancyEvent(param: StringConstants.empty));
           }
         },
         bloc: homeBloc,
@@ -98,9 +99,9 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
           if (homeState is SuccessGetAllRegistersState) {
             return RefreshIndicator(
               onRefresh: () async {
-                homeBloc.add(GetHomeListVacancyEvent(param: 'dateEntry'));
+                homeBloc.add(GetHomeListVacancyEvent(param: StringConstants.empty));
                 setState(() {
-                  changeTitle('dateEntry');
+                  changeTitle(StringConstants.dateEntry);
                 });
               },
               child: ListView.builder(
@@ -116,10 +117,9 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
                         arguments: homeState.data[index],
                       );
                       if (value!) {
-                        homeBloc
-                            .add(GetHomeListVacancyEvent(param: 'dateEntry'));
+                        homeBloc.add(GetHomeListVacancyEvent(param: StringConstants.empty));
                         setState(() {
-                          changeTitle('dateEntry');
+                          changeTitle(StringConstants.dateEntry);
                         });
                       }
                     },
@@ -148,9 +148,9 @@ class _HomePageState extends State<HomePage> with HomePageMixin {
           );
 
           if (value!) {
-            homeBloc.add(GetHomeListVacancyEvent(param: 'dateEntry'));
+            homeBloc.add(GetHomeListVacancyEvent(param: StringConstants.empty));
             setState(() {
-              changeTitle('dateEntry');
+              changeTitle(StringConstants.dateEntry);
             });
           }
         },
